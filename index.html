@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>社區暱稱產生器</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 400px; margin: auto; }
+    select, input, button { width: 100%; padding: 10px; margin: 10px 0; font-size: 16px; box-sizing: border-box; }
+    button { background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    .result { font-weight: bold; color: #333; text-align: center; margin-top: 20px; font-size: 18px; }
+  </style>
+</head>
+<body>
+  <h2>社區暱稱產生器</h2>
+  
+  <label>選擇期數：</label>
+  <select id="phase">
+    <option value="一">一期</option>
+    <option value="二">二期</option>
+    <option value="三">三期</option>
+  </select>
+
+  <label>選擇棟別：</label>
+  <select id="building">
+    <option value="A">A棟</option>
+    <option value="B">B棟</option>
+    <option value="C">C棟</option>
+    <option value="D">D棟</option>
+    <option value="E">E棟</option>
+    <option value="F">F棟</option>
+    <option value="H">H棟</option>
+    <option value="I">I棟</option>
+  </select>
+
+  <label>輸入暱稱：</label>
+  <input type="text" id="nickname" placeholder="例如：帥哥">
+
+  <button onclick="generateName()">產生並複製</button>
+  <div id="output" class="result"></div>
+
+  <script>
+    function generateName() {
+      const p = document.getElementById('phase').value;
+      const b = document.getElementById('building').value;
+      const n = document.getElementById('nickname').value || '未輸入';
+      const result = `${p}期-${b}棟-${n}`;
+      
+      document.getElementById('output').innerText = "您的暱稱：" + result;
+
+      navigator.clipboard.writeText(result).then(() => {
+        alert('已複製：' + result + '\n您可以直接去社群貼上修改囉！');
+      }).catch(err => {
+        alert('複製失敗，請手動選取複製：' + result);
+      });
+    }
+  </script>
+</body>
+</html>
